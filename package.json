@@ -1,0 +1,19 @@
+{
+  "scripts": {
+    "cyr": "cypress run",
+    "cyo": "cypress open",
+    "cyrh": "cypress run --headed --spec 'cypress/e2e/*.cy.js'",
+    "runAll": "cypress run --headed --spec 'cypress/e2e/*.cy.js'",
+    "runAll_chrome": "cypress run --headed --spec 'cypress/e2e/*.cy.js' --browser chrome",
+    "runAll_firefox": "cypress run --headed --spec 'cypress/e2e/*.cy.js' --browser firefox",
+    "runAll_edge": "cypress run --headed --spec 'cypress/e2e/*.cy.js' --browser edge",
+    "runAll_webkit": "cypress run --headed --spec 'cypress/e2e/*.cy.js' --browser webkit",
+    "cyp2": "cypress-parallel -s cyr -t 2 -d 'cypress/e2e/*.cy.js' -r cypress-mochawesome-reporter"
+  },
+  "dependencies": {
+    "cypress": "^13.13.2",
+    "cypress-mochawesome-reporter": "^3.8.2",
+    "cypress-parallel": "^0.14.0",
+    "playwright-webkit": "^1.45.3"
+  }
+}
