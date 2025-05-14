@@ -59,7 +59,7 @@ export default class Utils{
      * @param {string} text - The text to enter into the field
      * @returns {void}
      */
-    enterText(selector, text) {
+    typeText(selector, text) {
         cy.get(selector).clear().type(text)
         this.actionLog(`Typed "${text}" into element`)
     }
@@ -70,7 +70,7 @@ export default class Utils{
      * @param {string} pass - The password to enter into the field
      * @returns {void}
      */
-    enterPass(selector, pass) {
+    typePass(selector, pass) {
         cy.get(selector).clear().type(pass)
         this.actionLog(`Typed password in the field`)
     }
@@ -249,6 +249,16 @@ export default class Utils{
     verifyFullUrlWithBaseUrl(partialPath) {
         const fullUrl = `${Cypress.env('baseUrl')}${partialPath}`
         this.verifyFullUrl(fullUrl)
+    }
+
+    /**
+     * Verifies the title of the page
+     * @param {string} titleText - The title of the page
+     * @returns {void}
+     */
+    verifyPageTitle(titleText) {
+        cy.title().should('eq', titleText)
+        this.assertionLog(`Verified URL "${titleText}"`)
     }
 
     /**
@@ -440,7 +450,8 @@ export default class Utils{
      */
     selectDropdownByText(selector, optionText) {
         this.actionLog(`Selecting "${optionText}" from dropdown`)
-        cy.get(selector).select(optionText)
+        cy.get(selector).select(optionText).should('have.value', optionText)
+        this.assertionLog(`"${optionValue}" selected from the dropdown`)
     }
 
     /**
@@ -451,7 +462,8 @@ export default class Utils{
      */
     selectDropdownByValue(selector, optionValue) {
         this.actionLog(`Selecting option with value "${optionValue}"`)
-        cy.get(selector).select(optionValue)
+        cy.get(selector).select(optionValue).should('have.value', optionValue)
+        this.assertionLog(`"${optionValue}" selected from the dropdown`)
     }
     
     /**
@@ -462,7 +474,8 @@ export default class Utils{
      */
     selectDropdownByTestId(testId, optionValue) {
         this.actionLog(`Selecting option with value "${optionValue}" from dropdown with data-test-id "${testId}"`)
-        cy.get(`[data-test-id="${testId}"]`).select(optionValue)
+        cy.get(`[data-test-id="${testId}"]`).select(optionValue).should('have.value', optionValue)
+        this.assertionLog(`"${optionValue}" selected from the dropdown`)
     }
 
     /**
